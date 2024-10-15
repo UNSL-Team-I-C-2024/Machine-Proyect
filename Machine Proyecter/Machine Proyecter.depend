@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1728585379 source:c:\users\alfon\documents\c\machine proyecter\main.c
+	<stdio.h>
+	<stdlib.h>
+	"listaE_Cliente.h"
+
+1728589507 c:\users\alfon\documents\c\machine proyecter\listae_cliente.h
+	"cliente.h"
+
+1728589507 c:\users\alfon\documents\c\machine proyecter\cliente.h
+	<string.h>
+	<stdlib.h>
+
