@@ -1,5 +1,5 @@
 #include <string.h>
-#include <stdlib.h>
+#include <malloc.h>
 
 typedef struct
 {
@@ -83,8 +83,8 @@ void set_Fecha_Hora(turno *turno,int Hora){
     (*turno).Fecha_de_turno.Hora=Hora;
 }
 
-void set_Realizado(turno *turno,int Realizado){
-    (*turno).Realizado=Realizado;
+void set_Realizado(turno *turno){
+    (*turno).Realizado = 1;
 }
 
 // GETS

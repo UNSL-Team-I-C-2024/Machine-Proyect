@@ -21,12 +21,12 @@ void ListE_Starter (Lista_de_Clientes *Aux)
 void ListE_Insert (Lista_de_Clientes *Aux, Cliente Aux2)
 {
     int Counter;
-    for (Counter=(*Aux).Ultimo+1;Counter>(*Aux).Cursor;Counter--)
+    (*Aux).Ultimo += 1;
+    for (Counter=(*Aux).Ultimo;Counter>(*Aux).Cursor;Counter--)
     {
         (*Aux).Vipd[Counter] = (*Aux).Vipd[Counter-1];
     }
-    (*Aux).Ultimo += 1;
-    (*Aux).Vipd[(*Aux).Cursor] = Aux2;
+    Aux ->Vipd[Aux->Cursor] = Aux2;
 }
 
 void ListE_Suppres (Lista_de_Clientes *Aux)
