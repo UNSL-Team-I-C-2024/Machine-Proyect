@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1730488960 source:c:\users\alfon\documents\c\machine proyecter\main.c
+	<stdio.h>
+	<malloc.h>
+	"listaE_Cliente.h"
+	"listaD_Turno.h"
+
+1730489633 c:\users\alfon\documents\c\machine proyecter\listae_cliente.h
+	"cliente.h"
+
+1729022554 c:\users\alfon\documents\c\machine proyecter\cliente.h
+	<string.h>
+	<stdlib.h>
+
+1729020192 c:\users\alfon\documents\c\machine proyecter\listad_turno.h
+	<stdlib.h>
+	"turno.h"
+
+1730213300 c:\users\alfon\documents\c\machine proyecter\turno.h
+	<string.h>
+	<stdlib.h>
+
