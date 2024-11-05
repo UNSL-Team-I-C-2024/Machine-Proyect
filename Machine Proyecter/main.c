@@ -16,7 +16,7 @@ void MuestraAllTurnosMes (Lista_de_Turnos Lturno, int Mes); // C // EL ACABADO
 
 void BuscarMostrarTurnoPorNombre (Lista_de_Turnos Lturno, char Nombre[]); // D // EL ACABADO requiere paginado
 
-void MuestraTurnoPorIdCliente (Lista_de_Turnos Lturno, turno Aux, int ID); // E // EL ACABADO recursiva, muestra fecha, total e idturno
+int MuestraTurnoPorIdCliente (Lista_de_Turnos Lturno, turno Aux, int ID); // E // EL ACABADO recursiva, muestra fecha, total e idturno
 
 float CalcularGananciaMensual (Lista_de_Turnos Lturnos,int mes, float cont); // F // EL ACABADO recursiva
 
@@ -48,16 +48,17 @@ int main()
 {
     Lista_de_Clientes Lclientes;
     Lista_de_Turnos Lturnos;
-    PrecargaAutomatica(&Lclientes);
-    int Option;
+    ListD_Starter(&Lturnos);
+    char NombreAux[51];
+    int Option,IntAux;
 
     // Crear un control en caso de que la lista esté vacia o llena (Para ambas listas). la integracion va por tu cuenta pero que afecte a todas las funciones
-    
+
     // Apartir de acá abajo va todo adentro del do-while
 
-    printf("(1)Acciones con turnos\n(2)Acciones con clientes\n");
+    printf("(1)Acciones con turnos\n(2)Acciones con clientes\n3)Salir\n");
     scanf("%d",&Option);
-    while(Option<1 || Option>2)
+    while(Option<1 || Option>3)
     {
     printf("Opcion invalida(1-2)\n");
     scanf("%d",&Option);
@@ -77,15 +78,42 @@ int main()
                 {
                 case 1:
                 {
+                    if (ListD_IsFull(Lturnos))
+                        printf("La lista se encuentra llena...");
+                    else
+                        CargaTurno(&Lturnos,&Lclientes);
+                    break;
                 }
                 case 2:
                 {
+                   if (ListD_IsEmpty(Lturnos))
+                    printf("No hay turnos cargados...");
+                   else
+                    {
+                        do{
+                        printf("Ingrese el mes a mostrar los turnos(11-12): ");
+                        scanf("%d",&IntAux);
+                        }
+                        while (IntAux<11||IntAux>12);
+                        MuestraAllTurnosMes(Lturnos,IntAux);
+                    }
+                   break;
                 }
                 case 3:
                 {
+                    if (ListD_IsEmpty(Lturnos))
+                        printf("No hay turnos cargados...");
+                    else
+                        {
+                        printf("Ingrese el nombre a buscar: ");
+                        scanf(" %s",NombreAux);
+                        BuscarMostrarTurnoPorNombre(Lturnos,NombreAux);
+                        }
+                    break;
                 }
                 case 4:
                 {
+
                 }
                 case 5:
                 {
@@ -112,10 +140,11 @@ int main()
                 {
                 }
          }
+         break;
         }
         case 2:
         {
-           printf("1)Modificar cantidad de tratamientos\n2)Registrar cliente\n3)Mostrar todos los clientes\n4)Eliminar cliente (por ID)\n");
+           printf("1)Modificar cantidad de tratamientos\n2)Registrar cliente\n3)Mostrar todos los clientes\n4)Eliminar cliente (por ID)\n5)Precargar clientes\n");
            scanf("%d",&Option);
            while (Option<1 || Option>5)
            {
@@ -128,8 +157,17 @@ int main()
               case 2:{}
               case 3:{}
               case 4:{}
+              case 5:
+                {
+                    if (!ListE_IsFull(Lclientes))
+                        PrecargaAutomatica(&Lclientes);
+                    else
+                        printf("No hay espacio para mas clientes.\n");
+                    break;
+                }
            }
         }
+        case 3:{}
     }
 
 
@@ -146,7 +184,7 @@ int main()
     return 0;
 }
 
- 
+
 
 
 
@@ -188,7 +226,7 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
 {
     turno TurnoAuxiliar;
     Cliente ClienteAuxiliar;
-    int IDbuscar, Opcion, Counter = 0, TotalAux=0, *Treatments;
+    int IDbuscar, Opcion, Counter = 0, TotalAux=0, *Treatments,*Aux;
     char MasTratamientos,OpcionChar;
 
     init_Turno(&TurnoAuxiliar);
@@ -303,7 +341,7 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
         case 12:{
             while (Treatments[2]<1||Treatments[2]>31)
             {
-                
+
                 if(Treatments[2] == 1 || Treatments[2] == 8 || Treatments[2] == 15 || Treatments[2] == 22 || Treatments[2] == 29)
                 printf("(No hay turnos los domingos)\n");
                 else
@@ -324,7 +362,6 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
     set_Fecha_mes(&TurnoAuxiliar,Treatments[1]);
     set_Fecha_Dia(&TurnoAuxiliar,Treatments[2]);
     set_Fecha_Hora(&TurnoAuxiliar,Treatments[3]);
-    int *Aux;
     printf("Resumen del turno:\n");
         printf ("Nombre: %s \n", get_Nombre_Turno(TurnoAuxiliar));
         printf ("ID Cliente: %d \n", get_IdCliente_turno(TurnoAuxiliar));
@@ -497,7 +534,7 @@ void BuscarMostrarTurnoPorNombre (Lista_de_Turnos Lturno, char Nombre[])
                 else
                 printf("Turno no realizado\n\n");
             Counter += 1;
-            if ((Counter % 3) == 0)
+            if (!(Counter % 3))
         {
             printf ("Presione cualquier tecla para continuar...");
             scanf("%c", &extra);
@@ -513,7 +550,7 @@ void BuscarMostrarTurnoPorNombre (Lista_de_Turnos Lturno, char Nombre[])
     free (Aux);
 }
 
-void MuestraTurnoPorIdCliente (Lista_de_Turnos Lturno, turno Aux,int ID)
+int MuestraTurnoPorIdCliente (Lista_de_Turnos Lturno, turno Aux,int ID)
 {
     if (ListD_IsOos(Lturno))
     {
@@ -526,11 +563,13 @@ void MuestraTurnoPorIdCliente (Lista_de_Turnos Lturno, turno Aux,int ID)
             printf ("ID Turno: %d \n", get_IdTurno(Aux));
             printf ("Total a pagar: %f \n", get_Total(Aux));
             printf ("Fecha del turno %d hs %d/%d/%d\n \n", get_Fecha_Hora(Aux), get_Fecha_Dia(Aux), get_Fecha_Mes(Aux), get_Fecha_Anio(Aux));
+            return 1;
         }
         ListD_Forward(&Lturno);
         Aux = ListD_Copy(Lturno);
         MuestraTurnoPorIdCliente ( Lturno, Aux, ID);
      }
+     return 0;
 }
 
 float CalcularGananciaMensual (Lista_de_Turnos Lturno, int mes, float Cont)
@@ -791,8 +830,8 @@ void CancelarTurnoIdcliente(Lista_de_Turnos *Lturno)
             printf("Turno eliminado \n\n");
             fclose (Fp);
             ListD_Suppresor(Lturno);
-           
-    } 
+
+    }
     free (Aux);
 }
 
@@ -901,7 +940,7 @@ void MuestraTurnosPorTratamiento (Lista_de_Turnos Lturno, int Treatment) // revi
     printf ("6)%s \n", NameTreat[5]);
     printf ("7)%s \n", NameTreat[6]);
     printf ("8)%s \n", NameTreat[7]);
-    printf ("9)%s \n", NameTreat[8]); 
+    printf ("9)%s \n", NameTreat[8]);
     printf ("10)%s \n", NameTreat[9]);
     scanf("%d",&Treatment);
     while (Treatment<1||Treatment>10)
@@ -912,7 +951,7 @@ void MuestraTurnosPorTratamiento (Lista_de_Turnos Lturno, int Treatment) // revi
     ListD_Reset (&Lturno);
     while (!ListD_IsOos(Lturno))
     {
-        
+
         Aux = get_Tratamiento (ListD_Copy(Lturno));
         if(Aux[Treatment-1])
         {
@@ -989,8 +1028,14 @@ void PrecargaAutomatica (Lista_de_Clientes *Lclientes)
          set_CantTratamientos(&Caux,Vcanttrat);
          set_Nivel(&Caux,Vnivel);
          ListE_Insert(Lclientes, Caux);
+         if (ListE_IsFull(*Lclientes))
+            {
+                printf("Carga parcial...");
+                break;
+            }
          }
          fclose(Fp);
+         printf("Precarga exitosa!!!\n");
     }
 }
 
