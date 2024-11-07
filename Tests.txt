@@ -1,0 +1,18 @@
+Tests
+// AP (Aprovado) NP (No Aprovado) //
+
+Precarga Automatica:
+carga completa AP
+Carga Parcial AP
+
+Cargar cliente AP
+
+Cargar Turno AP
+
+Busca Turno
+
+Muestra por Nombre semi AP
+
+Muestra All turnos Pre AP
+
+Muestra All Clientes Pre AP
