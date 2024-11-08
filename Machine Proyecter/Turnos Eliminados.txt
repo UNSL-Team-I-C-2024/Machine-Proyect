@@ -1,0 +1,8 @@
+Jose_Luis 
+37123456 
+1 
+12 12/12/2024
+Depilacion completa 60000 
+Metodo de pago: Credito
+Metodo de pago: Efectivo
+Total a pagar: 56999.00 

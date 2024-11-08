@@ -8,41 +8,41 @@ typedef char Treat[51];
 Treat NameTreat [10] = {"Depilacion completa", "Bronceado", "Maquillaje", "Drenaje linfatico  manual", "Masaje", "Tratamiento con Botox", "implantes faciales con acido hialuronico", "Radiofrecuencia facial", "Limpieza facial", "Peeling quimico"};
 int PriceTreat [8]= {60000,8000,5000,40000,10000,150000,200000,30000,}; // precio de los tratamientos
 
-void CargaTurno(Lista_de_Turnos *ListTurn, Lista_de_Clientes *ListClient); // A // Finished/ (1) 
+void CargaTurno(Lista_de_Turnos *ListTurn, Lista_de_Clientes *ListClient); // A // Finished/Tested (1)
 
-int BuscarTurnoPorIdcliente (Lista_de_Turnos *Lturno, int IdCliente); // B // Finished/ (0)
+int BuscarTurnoPorIdcliente (Lista_de_Turnos *Lturno, int IdCliente); // B // Finished/Tested (0)
 
-void MuestraAllTurnosMes (Lista_de_Turnos Lturno, int Mes); // C // Finished/ (2)
+void MuestraAllTurnosMes (Lista_de_Turnos Lturno, int Mes); // C // Finished/Tested (2)
 
-void BuscarMostrarTurnoPorNombre (Lista_de_Turnos Lturno, char Nombre[]); // D // Finished/ (3)
+void BuscarMostrarTurnoPorNombre (Lista_de_Turnos Lturno, char Nombre[]); // D // Finished/Tested (3)
 
-int MuestraTurnoPorIdCliente (Lista_de_Turnos Lturno, turno Aux, int ID); // E // Finished/ (4)
+int MuestraTurnoPorIdCliente (Lista_de_Turnos Lturno, turno Aux, int ID); // E // Finished/Tested (4)
 
-float CalcularGananciaMensual (Lista_de_Turnos Lturnos,int mes, float cont); // F // Finished/ (5)
+float CalcularGananciaMensual (Lista_de_Turnos Lturnos,int mes, float cont); // F // Finished/Tested (5)
 
-void MuestraAllTurnos (Lista_de_Turnos Lturno); // G // Finished/ (6)
+void MuestraAllTurnos (Lista_de_Turnos Lturno); // G // Finished/Tested (6)
 
-void ModificarCantidadTratamientos (Lista_de_Clientes *Lcliente); // H // Finished/ (1C)
+void ModificarCantidadTratamientos (Lista_de_Clientes *Lcliente); // H // Finished/Tested (1C)
 
-void ModificarMetPago (Lista_de_Turnos *Lturno); // I // Finished/ (7)
+void ModificarMetPago (Lista_de_Turnos *Lturno); // I // Finished/Tested (7)
 
-void CancelarTurnoIdcliente(Lista_de_Turnos *Lturno); // J // Finished/ (8)
+void CancelarTurnoIdcliente(Lista_de_Turnos *Lturno); // J // Finished/Tested (8)
 
-void AlmacenarAllTurnosPorPagoArchivos(Lista_de_Turnos Lturno, int Metdepago); // K // Finished/ (9)
+void AlmacenarAllTurnosPorPagoArchivos(Lista_de_Turnos Lturno, int Metdepago); // K // Finished/Tested (9)
 
-void RegistrarCliente(Lista_de_Clientes *Lcliente); // L // Finished/ (2C)
+void RegistrarCliente(Lista_de_Clientes *Lcliente); // L // Finished/Tested (2C)
 
-void MuestraTurnosPorTratamiento (Lista_de_Turnos Lturno, int Treatment); // M // Finished/ (10)
+void MuestraTurnosPorTratamiento (Lista_de_Turnos Lturno, int Treatment); // M // Finished/Tested (10)
 
-void PrecargaAutomatica (Lista_de_Clientes *Lclientes); // N // Finished/ (5C)
+void PrecargaAutomatica (Lista_de_Clientes *Lclientes); // N // Finished/Tested (5C)
 
-void MuestraAllClientes (Lista_de_Clientes Listclient); // Ñ Finished/ (3C)
+void MuestraAllClientes (Lista_de_Clientes Listclient); // Ñ Finished/Tested (3C)
 
-void EliminarClienteSegunIdcliente(Lista_de_Clientes *Lcliente); // O // Finished/ (4C)
+void EliminarClienteSegunIdcliente(Lista_de_Clientes *Lcliente); // O // Finished/Tested (4C)
 
-void ConfirmaturnoIdcliente(Lista_de_Clientes *Lcliente, Lista_de_Turnos *Lturno); // P // Finished/ (11)
+void ConfirmaturnoIdcliente(Lista_de_Clientes *Lcliente, Lista_de_Turnos *Lturno); // P // Finished/Tested (11)
 
-void MuestraAllTurnosNoRealizado (Lista_de_Turnos ListTurn); // Q // Finished/ (12)
+void MuestraAllTurnosNoRealizado (Lista_de_Turnos ListTurn); // Q // Finished/Tested (12)
 
 int main()
 {
@@ -51,13 +51,12 @@ int main()
     turno TurnoAux;
     ListD_Starter(&Lturnos);
     ListE_Starter(&Lclientes);
-    char NombreAux[51];
-    int Option,IntAux;
-    float FloatAux = 0;
+    char NombreAux[51], AuxChar;
+    int Option,IntAux, Ctr=0;
+    float FloatAux = 0, FloatAux2 = 0;
     do
     {
-    printf("(1)Acciones con turnos\n(2)Acciones con clientes\n(3)Salir\n");
-    scanf("%d",&Option);
+    printf("(1)Acciones con turnos\n(2)Acciones con clientes\n(3)Salir\n");    scanf("%d",&Option);
     while(Option<1 || Option>3)
     {
     printf("Opcion invalida(1-3)\n");
@@ -106,14 +105,19 @@ int main()
                         printf("No hay turnos cargados...");
                     else
                         {
-                        printf("Ingrese el nombre a buscar: ");
-                        scanf(" %s",NombreAux);
+                        printf("Ingrese el nombre a buscar (Utilice '_' para separar en caso de tener mas de un nombre): ");
+                        scanf("%s",NombreAux);
                         BuscarMostrarTurnoPorNombre(Lturnos,NombreAux);
                         }
                     break;
                 }
                 case 4:
                 {
+                    if (ListD_IsEmpty(Lturnos))
+                    {
+                        printf("No hay turnos cargados...");
+                        break;
+                    }
                     do
                     {
                     printf("Ingrese la ID del cliente: ");
@@ -128,13 +132,21 @@ int main()
                 }
                 case 5:
                 {
+                    if (ListD_IsEmpty(Lturnos))
+                    {
+                        printf("No hay turnos cargados...");
+                        break;
+                    }
                     do
                     {
                     printf("Ingrese el mes a calcular (11-12): \n");
                         scanf("%d",&IntAux);
                     }
                     while (IntAux<11||IntAux>12);
-                    printf("Ganancia mensual del mes %d: $%f\n",IntAux,CalcularGananciaMensual(Lturnos,IntAux,FloatAux));
+                    FloatAux2 = 0;
+                    ListD_Reset(&Lturnos);
+                    FloatAux2 = CalcularGananciaMensual(Lturnos,IntAux,FloatAux);
+                    printf("Ganania mensual del mes %d: $%.2f\n",IntAux,FloatAux2);
                     break;
                 }
                 case 6:
@@ -158,7 +170,7 @@ int main()
                     if (ListD_IsEmpty(Lturnos))
                         printf("No hay turnos guardados.\n");
                     else
-                        CancelarTurnoIdcliente(&Lturnos);  
+                        CancelarTurnoIdcliente(&Lturnos);
                     break;
                 }
                 case 9:  // revision especial  //
@@ -173,7 +185,7 @@ int main()
                         printf("Ingrese el metodo de pago:\n(1) Debito\n(2) Credito\n(3) QR\n(4) Efectivo\n");
                         scanf("%d",&IntAux);
                    }
-                   while (IntAux>1 || IntAux<4);
+                   while (IntAux<1 && IntAux>4);
                    AlmacenarAllTurnosPorPagoArchivos(Lturnos,IntAux);
                    break;
                 }
@@ -276,7 +288,7 @@ int main()
                     break;
                 }
                 EliminarClienteSegunIdcliente(&Lclientes);
-                break;  
+                break;
             }
             case 5:
                 {
@@ -285,8 +297,14 @@ int main()
                         printf("No hay espacio para mas clientes.\n");
                         break;
                     }
+                    if (Ctr != 0)
+                    {
+                        printf ("Solo puede precargar una vez \n");
+                        break;
+                    }
                     else
                     PrecargaAutomatica(&Lclientes);
+                    Ctr++;
                     break;
                 }
            }
@@ -298,11 +316,14 @@ int main()
             break;
         }
     }
-}
+    printf ("\nIngrese un caracter para continuar \n");
+    scanf ("%c", &AuxChar);
+    AuxChar = getc(stdin);
+    system ("cls");
+    }
 while (Option != -1);
 return 0;
 }
-
 
 void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
 {
@@ -333,8 +354,9 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
     ClienteAuxiliar = ListE_Copy(*ListClient);
     set_Nombre_Turno(&TurnoAuxiliar,get_Nombre(ClienteAuxiliar));
     do{
-        if (Counter<=4)
+        if (Counter<4)
         {
+            system("cls");
          printf("Que tratamientos desea?\n(1)Depilacion completa $60.000\n(2)Bronceado $8000\n(3)Maquillaje $5000\n(4)Drenaje linfatico  manual $40.000\n(5)Masaje $10.000\n(6)Tratamiento con botox $150.000\n(7)Implantes faciales con acido hialuronico $200.000\n(8)Radiofrecuencia facial $30.000\n(9)Limpieza facial $5.000\n(10)Peeling quimico $40.000\n");
          scanf("%d",&Opcion);
          while (Opcion<1 || Opcion>10)
@@ -343,9 +365,10 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
             scanf("%d",&Opcion);
           }
           set_Tratamiento (&TurnoAuxiliar, Opcion-1);
+          Counter++;
          printf("Desea aniadir otro tratamiento?(Y/N)\n");
          scanf(" %c",&MasTratamientos);
-         while(MasTratamientos!='Y'&& MasTratamientos!='N')
+         while(MasTratamientos!='Y' && MasTratamientos!='N')
          {
              printf("Opcion invalida (Y/N)\n");
              scanf(" %c",&MasTratamientos);
@@ -353,12 +376,12 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
         }
         else
         {
-            printf("Limite de tratamientos alcanzado (4)\n");
+            printf("Limite de tratamientos alcanzado (4)\n \n");
             MasTratamientos = 'N';
         }
     }
     while(MasTratamientos == 'Y');
-    printf("Ingrese la forma de pago:\n(1) Debito\n(2) Credito\n(3) QR\n(4) Efectivo\n");
+    printf("\nIngrese la forma de pago:\n(1) Debito\n(2) Credito\n(3) QR\n(4) Efectivo\n");
     scanf("%d",&Opcion);
     while(Opcion<1 || Opcion>4)
     {
@@ -372,7 +395,7 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
    if(Treatments[1])
     TotalAux+= PriceTreat[1];
    if(Treatments[2])
-    TotalAux+= PriceTreat[2]; 
+    TotalAux+= PriceTreat[2];
    if(Treatments[3])
     TotalAux+= PriceTreat[3];
    if(Treatments[4])
@@ -386,7 +409,9 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
    if(Treatments[8]) // mismo precio que el PriceTreat[2]
     TotalAux+= PriceTreat[2];
    if(Treatments[9]) // mismo precio que el PriceTreat[3]
+   {
     TotalAux+= PriceTreat[3];
+   }
     IDbuscar = get_Nivel(ClienteAuxiliar);
    if (IDbuscar == 1)
     TotalAux -= (TotalAux*0.05);
@@ -395,6 +420,7 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
    if (IDbuscar == 3)
     TotalAux -= (TotalAux*0.15);
    set_Total(&TurnoAuxiliar,TotalAux);
+    system("cls");
    printf("Ingrese el anio: \n");
    scanf("%d", &Treatments[0]);
    while (Treatments[0] != 2024)
@@ -448,6 +474,7 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
     set_Fecha_mes(&TurnoAuxiliar,Treatments[1]);
     set_Fecha_Dia(&TurnoAuxiliar,Treatments[2]);
     set_Fecha_Hora(&TurnoAuxiliar,Treatments[3]);
+     system("cls");
     printf("Resumen del turno:\n");
         printf ("Nombre: %s \n", get_Nombre_Turno(TurnoAuxiliar));
         printf ("ID Cliente: %d \n", get_IdCliente_turno(TurnoAuxiliar));
@@ -481,10 +508,10 @@ void CargaTurno (Lista_de_Turnos *ListTurn,Lista_de_Clientes *ListClient)
             printf("Metodo de pago: Credito\n");
              if (Treatments[4] == 3)
             printf("Metodo de pago: QR\n");
-            else
+             if (Treatments[4] == 4)
             printf("Metodo de pago: Efectivo\n");
             printf ("Total a pagar: %.2f \n", get_Total(TurnoAuxiliar));
-            printf("Turno no realizado\n");
+            printf("Turno no realizado\n\n");
     printf("Desea guardar este turno?(Y/N) \n");
     scanf(" %c",&OpcionChar);
     while (OpcionChar!='Y' && OpcionChar!='N')
@@ -556,7 +583,7 @@ void MuestraAllTurnosMes (Lista_de_Turnos Lturno, int Mes)  // falta ordenar //
             printf("Metodo de pago: QR\n");
             else
             printf("Metodo de pago: Efectivo\n");
-            printf ("Total a pagar: %f \n", get_Total(TAuxiliar));
+            printf ("Total a pagar: %.2f \n", get_Total(TAuxiliar));
             if (get_Realizado(TAuxiliar))
                 printf("Turno Realizado\n\n");
                 else
@@ -572,7 +599,7 @@ void MuestraAllTurnosMes (Lista_de_Turnos Lturno, int Mes)  // falta ordenar //
 
 void BuscarMostrarTurnoPorNombre (Lista_de_Turnos Lturno, char Nombre[])
 {
-    int Counter=0, *Aux;
+    int Counter=0, Auxy=1, *Aux;
     char extra;
     turno TAuxiliar;
     ListD_Reset(&Lturno);
@@ -581,7 +608,7 @@ void BuscarMostrarTurnoPorNombre (Lista_de_Turnos Lturno, char Nombre[])
         if (strcmp(get_Nombre_Turno(ListD_Copy(Lturno)), Nombre) == 0)
         {
             TAuxiliar = ListD_Copy(Lturno);
-            printf ("Nombre: %s \n", get_Nombre_Turno(TAuxiliar));
+            printf ("\nNombre: %s \n", get_Nombre_Turno(TAuxiliar));
             printf ("ID Cliente: %d \n", get_IdCliente_turno(TAuxiliar));
             printf ("ID Turno: %d \n", get_IdTurno(TAuxiliar));
             printf ("Fecha del turno %dhrs %d/%d/%d\n", get_Fecha_Hora(TAuxiliar), get_Fecha_Dia(TAuxiliar), get_Fecha_Mes(TAuxiliar), get_Fecha_Anio(TAuxiliar));
@@ -614,16 +641,18 @@ void BuscarMostrarTurnoPorNombre (Lista_de_Turnos Lturno, char Nombre[])
             printf("Metodo de pago: QR\n");
             else
             printf("Metodo de pago: Efectivo\n");
-            printf ("Total a pagar: %f \n", get_Total(TAuxiliar));
+            printf ("Total a pagar: %.2f \n", get_Total(TAuxiliar));
             if (get_Realizado(TAuxiliar))
                 printf("Turno Realizado\n\n");
                 else
                 printf("Turno no realizado\n\n");
             Counter += 1;
-            if (!(Counter % 3))
+            if ((Counter /3) == Auxy)
         {
+            Auxy++;
             printf ("Presione cualquier tecla para continuar...");
             scanf("%c", &extra);
+            extra = getc(stdin);
             system("cls");
         }
         }
@@ -644,14 +673,15 @@ int MuestraTurnoPorIdCliente (Lista_de_Turnos Lturno, turno Aux,int ID)
     }
     else
     {
-        if (get_IdCliente_turno(Aux) == ID)
+        if (get_IdCliente_turno(Aux) == ID && !get_Realizado(Aux))
         {
             printf ("ID Turno: %d \n", get_IdTurno(Aux));
-            printf ("Total a pagar: %f \n", get_Total(Aux));
+            printf ("Total a pagar: %.2f \n", get_Total(Aux));
             printf ("Fecha del turno %dhrs %d/%d/%d\n \n", get_Fecha_Hora(Aux), get_Fecha_Dia(Aux), get_Fecha_Mes(Aux), get_Fecha_Anio(Aux));
             return 1;
         }
         ListD_Forward(&Lturno);
+        if (!ListD_IsOos(Lturno))
         Aux = ListD_Copy(Lturno);
         MuestraTurnoPorIdCliente ( Lturno, Aux, ID);
      }
@@ -668,12 +698,11 @@ float CalcularGananciaMensual (Lista_de_Turnos Lturno, int mes, float Cont)
     {
         if (get_Fecha_Mes(ListD_Copy(Lturno)) == mes && get_Realizado(ListD_Copy(Lturno)))
         {
-            Cont += get_Total(ListD_Copy(Lturno));
+            Cont = Cont + get_Total(ListD_Copy(Lturno));
         }
         ListD_Forward (&Lturno);
-        CalcularGananciaMensual (Lturno, mes, Cont);
+        return CalcularGananciaMensual (Lturno, mes, Cont);
     }
-    return 0;
 }
 
 void MuestraAllTurnos(Lista_de_Turnos Lturno)
@@ -715,9 +744,9 @@ void MuestraAllTurnos(Lista_de_Turnos Lturno)
             printf("Metodo de pago: Credito\n");
              if (get_Forma_de_pago(TAuxiliar) == 3)
             printf("Metodo de pago: QR\n");
-            else
+            if (get_Forma_de_pago(TAuxiliar) == 4)
             printf("Metodo de pago: Efectivo\n");
-            printf ("Total a pagar: %f \n", get_Total(TAuxiliar));
+            printf ("Total a pagar: %.2f \n", get_Total(TAuxiliar));
             if (get_Realizado(TAuxiliar))
                 printf("Turno Realizado\n\n");
                 else
@@ -731,7 +760,7 @@ void ModificarCantidadTratamientos (Lista_de_Clientes *Lcliente)
 {
     Cliente Laux;
     int IDbuscar, NuevaCant;
-    printf("Ingrese el ID del cliente para modificar sus tratamientos");
+    printf("Ingrese el ID del cliente para modificar sus tratamientos \n");
     scanf("%d",&IDbuscar);
     ListE_Reset(Lcliente);
     while (get_ID_Cliente(ListE_Copy(*Lcliente)) != IDbuscar && !ListE_IsOos(*Lcliente))
@@ -821,7 +850,7 @@ void CancelarTurnoIdcliente(Lista_de_Turnos *Lturno)
     char AuxChar;
     turno TAuxiliar;
     FILE *Fp;
-    printf ("Ingrese el ID de cliente");
+    printf ("Ingrese el ID de cliente:\n");
     scanf ("%d", &Aux2);
     if (!BuscarTurnoPorIdcliente(Lturno, Aux2))
     {
@@ -865,10 +894,11 @@ void CancelarTurnoIdcliente(Lista_de_Turnos *Lturno)
             printf("Metodo de pago: QR\n");
             else
             printf("Metodo de pago: Efectivo\n");
-            printf ("Total a pagar: %f \n", get_Total(TAuxiliar));
+            printf ("Total a pagar: %.2f \n", get_Total(TAuxiliar));
             printf("Turno no realizado\n\n");
             printf ("\n\n Desea eliminar este turno? (Y/N)\n");
             scanf ("%c", &AuxChar);
+            AuxChar = getc(stdin);
             while (AuxChar != 'Y' && AuxChar != 'N')
             {
                 printf ("Opcion incorrecta (Y/N) \n");
@@ -912,9 +942,9 @@ void CancelarTurnoIdcliente(Lista_de_Turnos *Lturno)
             fprintf(Fp,"Metodo de pago: Credito\n");
              if (get_Forma_de_pago(TAuxiliar) == 3)
             fprintf(Fp,"Metodo de pago: QR\n");
-            else
+            if (get_Forma_de_pago(TAuxiliar) == 4)
             fprintf(Fp,"Metodo de pago: Efectivo\n");
-            fprintf (Fp,"Total a pagar: %f \n", get_Total(TAuxiliar));
+            fprintf (Fp,"Total a pagar: %.2f \n", get_Total(TAuxiliar));
             printf("Turno eliminado \n\n");
             fclose (Fp);
             ListD_Suppresor(Lturno);
@@ -927,6 +957,7 @@ void AlmacenarAllTurnosPorPagoArchivos(Lista_de_Turnos Lturno, int Metdepago)
     int X = 0, *Aux;
     turno TAuxiliar;
     FILE *Fp;
+    ListD_Reset(&Lturno);
             if ((Fp = fopen ("Turnos Pagados.txt", "w")) == NULL)
             {
                 printf ("No se pueden archivar los turnos correctamente \n");
@@ -971,10 +1002,10 @@ void AlmacenarAllTurnosPorPagoArchivos(Lista_de_Turnos Lturno, int Metdepago)
             fprintf(Fp,"Metodo de pago: QR\n");
             else
             fprintf(Fp,"Metodo de pago: Efectivo\n");
-            fprintf (Fp,"Total pagado: %f \n", get_Total(TAuxiliar));
+            fprintf (Fp,"Total pagado: %.2f \n", get_Total(TAuxiliar));
+            X ++;
                 }
         ListD_Forward (&Lturno);
-        X ++;
     }
     printf ("Se archivaron con exito %d turnos \n", X);
     free (Aux);
@@ -1004,10 +1035,10 @@ void RegistrarCliente(Lista_de_Clientes *Lcliente)
         }
         ListE_Forward (Lcliente);
     }
-    printf("Ingrese el nombre del cliente: ");
-    scanf(" %51s",NombAux);
-    printf("Ingrese el apellido del cliente: ");
-    scanf(" %51s",ApeAux);
+    printf("Ingrese el nombre del cliente (Utilice '_' para separar en caso de tener mas de un nombre): ");
+    scanf("%s",NombAux);
+    printf("Ingrese el apellido del cliente (Utilice '_' para separar en caso de tener mas de un apellido): ");
+    scanf("%s",ApeAux);
     set_ID_Cliente(&ClienteAux,IDAux);
     set_Nombre(&ClienteAux,NombAux);
     set_Apellido(&ClienteAux,ApeAux);
@@ -1059,7 +1090,7 @@ void MuestraTurnosPorTratamiento (Lista_de_Turnos Lturno, int Treatment) // revi
             printf("Metodo de pago: QR\n");
             else
             printf("Metodo de pago: Efectivo\n");
-            printf ("Total a pagar: %f \n", get_Total(TAuxiliar));
+            printf ("Total a pagar: %.2f \n", get_Total(TAuxiliar));
             if (get_Realizado(TAuxiliar))
                 printf("Turno Realizado\n\n");
             else
@@ -1074,7 +1105,7 @@ void PrecargaAutomatica (Lista_de_Clientes *Lclientes)
 {
     Cliente Caux;
     int Vid,Vcanttrat,Vnivel;
-    char Vnomb[31], Vape[31];
+    char Vnomb[51], Vape[51];
     FILE *Fp;
     Fp = fopen("Clientes.txt","r");
     if (Fp == NULL)
@@ -1087,8 +1118,8 @@ void PrecargaAutomatica (Lista_de_Clientes *Lclientes)
         while (!feof(Fp))
         {
          fscanf (Fp,"%d",&Vid);
-         fscanf (Fp,"%s",Vnomb);
-         fscanf (Fp,"%s",Vape);
+         fscanf (Fp,"%s", Vnomb);
+         fscanf (Fp,"%s", Vape);
          fscanf (Fp,"%d",&Vcanttrat);
          fscanf (Fp,"%d",&Vnivel);
          set_ID_Cliente(&Caux,Vid);
@@ -1131,6 +1162,7 @@ void EliminarClienteSegunIdcliente (Lista_de_Clientes *Lcliente)
     Cliente ClientAux;
     printf("Ingrese la ID del cliente a eliminar: ");
     scanf("%d",&IDaux);
+    ListE_Reset(Lcliente);
     while (!ListE_IsOos(*Lcliente) && get_ID_Cliente(ListE_Copy(*Lcliente)) != IDaux)
     {
         ListE_Forward(Lcliente);
@@ -1141,16 +1173,17 @@ void EliminarClienteSegunIdcliente (Lista_de_Clientes *Lcliente)
         return;
     }
         ClientAux = ListE_Copy(*Lcliente);
-        printf ("ID cliente: %d \n", get_ID_Cliente(ClientAux));
+        printf ("\nID cliente: %d \n", get_ID_Cliente(ClientAux));
         printf ("Nombre: %s \n", get_Nombre(ClientAux));
         printf ("Apellido: %s \n", get_Apellido(ClientAux));
         printf ("Cantidad de tratamientos: %d \n", get_CantTratamientos(ClientAux));
         printf ("Nivel: %d \n \n", get_Nivel(ClientAux));
-        printf ("\n\n Desea eliminar este cliente? (Y/N)\n");
+        printf ("\n\nDesea eliminar este cliente? (Y/N)\n");
         scanf ("%c", &AuxChar);
+        AuxChar = getc(stdin);
     while (AuxChar != 'Y' && AuxChar != 'N')
     {
-        printf ("Opcion incorrecta (Y/N) \n");
+        printf ("Opcion invalida (Y/N) \n");
         scanf ("%c", &AuxChar);
     }
     if (AuxChar == 'N')
@@ -1164,6 +1197,7 @@ void ConfirmaturnoIdcliente(Lista_de_Clientes *Lcliente, Lista_de_Turnos *Lturno
     int SumTrat = 0,IDaux;
     Cliente ClienteAux;
     turno TurnoAux;
+    char AuxChar;
     int *Aux;
     ListE_Reset(Lcliente);
     printf("Ingrese la ID del cliente para cambiar su turno a realizado: ");
@@ -1177,87 +1211,62 @@ void ConfirmaturnoIdcliente(Lista_de_Clientes *Lcliente, Lista_de_Turnos *Lturno
     {
         ListE_Forward(Lcliente);
     }
-    if (ListE_IsOos(*Lcliente))
-    {
         TurnoAux = ListD_Copy(*Lturno);
         if (get_Forma_de_pago(TurnoAux) == 1)
         {
             printf("Metodo de pago: Debito\n");
             printf ("presione cualquier tecla para continuar \n");
-            getchar ();
+            scanf ("%c", &AuxChar);
+            AuxChar = getc(stdin);
         }
         if (get_Forma_de_pago(TurnoAux) == 2)
         {
             printf("Metodo de pago: Credito\n");
             printf ("presione cualquier tecla para continuar \n");
-            getchar ();
+            scanf ("%c", &AuxChar);
+            AuxChar = getc(stdin);
         }
         if (get_Forma_de_pago(TurnoAux) == 3)
         {
             printf("Metodo de pago: QR\n");
             printf ("\n ------ \n|@ Code|\n| QR @ |\n ------ \n");
             printf ("presione cualquier tecla para continuar \n");
-            getchar ();
+            scanf ("%c", &AuxChar);
+            AuxChar = getc(stdin);
         }
-        else
-            {
+        if (get_Forma_de_pago(TurnoAux) == 4)
+        {
             printf("Metodo de pago: Efectivo\n");
             printf ("presione cualquier tecla para continuar \n");
-            getchar ();
-            }
+            scanf ("%c", &AuxChar);
+            AuxChar = getc(stdin);
+        }
         set_Realizado(&TurnoAux);
         printf("Turno modificado correctamente\n");
+        Aux = get_Tratamiento (TurnoAux);
         ListD_Suppresor (Lturno);
         ListD_Pusher (Lturno, TurnoAux);
-    }
-    else
-    {
-        TurnoAux = ListD_Copy(*Lturno);
-        ClienteAux= ListE_Copy(*Lcliente);
-        Aux = get_Tratamiento(TurnoAux);
-        if (get_Forma_de_pago(TurnoAux) == 1)
+        if (!ListE_IsOos(*Lcliente))
         {
-            printf("Metodo de pago: Debito\n");
-            printf ("presione cualquier tecla para continuar \n");
-            getchar ();
-        }
-        if (get_Forma_de_pago(TurnoAux) == 2)
-        {
-            printf("Metodo de pago: Credito\n");
-            printf ("presione cualquier tecla para continuar \n");
-            getchar ();
-        }
-        if (get_Forma_de_pago(TurnoAux) == 3)
-        {
-            printf("Metodo de pago: QR\n");
-            printf ("\n ------ \n|@ Code|\n| QR @ |\n ------ \n");
-            printf ("presione cualquier tecla para continuar \n");
-            getchar ();
-        }
-        else
-            {
-            printf("Metodo de pago: Efectivo\n");
-            printf ("presione cualquier tecla para continuar \n");
-            getchar ();
-            }
-        set_Realizado(&TurnoAux);
-        ListD_Suppresor (Lturno);
-        ListD_Pusher (Lturno, TurnoAux);
         for (IDaux=0;IDaux<10;IDaux++)
-            SumTrat += Aux[IDaux];
-        Aux[0]=get_CantTratamientos (ClienteAux);
-        SumTrat+=Aux[0];
+        {
+            SumTrat = SumTrat + Aux[IDaux];
+        }
+        ClienteAux = ListE_Copy(*Lcliente);
+        IDaux = 0;
+        IDaux = get_CantTratamientos (ClienteAux);
+        SumTrat = SumTrat + IDaux;
         set_CantTratamientos(&ClienteAux, SumTrat);
         if (SumTrat<5)
             set_Nivel(&ClienteAux, 1);
-        if (SumTrat>4&&SumTrat<11)
+        if (SumTrat>4 && SumTrat<11)
             set_Nivel(&ClienteAux, 2);
         if (SumTrat>10)
             set_Nivel(&ClienteAux, 3);
-        printf("Turno y cliente modificado correctamente\n");
+        printf("Cliente modificado correctamente\n");
         ListE_Suppres(Lcliente);
         ListE_Insert(Lcliente,ClienteAux);
-    }
+        }
     free(Aux);
 }
 
@@ -1305,7 +1314,7 @@ void MuestraAllTurnosNoRealizado (Lista_de_Turnos Lturno)
             printf("Metodo de pago: QR\n");
             else
             printf("Metodo de pago: Efectivo\n");
-            printf ("Total a pagar: %f \n", get_Total(TAuxiliar));
+            printf ("Total a pagar: %.2f \n", get_Total(TAuxiliar));
             if (get_Realizado(TAuxiliar))
                 printf("Turno Realizado\n\n");
             else

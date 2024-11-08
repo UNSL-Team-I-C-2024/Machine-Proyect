@@ -55,9 +55,12 @@ void ListD_Suppresor (Lista_de_Turnos *Aux)
         (*Aux).CursorAux = (*Aux).Acesso;
         (*Aux).Cursor = (*Aux).Acesso;
     }
+    else
+    {
     (*Aux).Cursor = (*Aux).Cursor->Next;
     free ((*Aux).CursorAux->Next);
-    (*Aux).CursorAux->Next = (*Aux).Cursor;   
+    (*Aux).CursorAux->Next = (*Aux).Cursor;
+    }
 }
 
 void ListD_Reset (Lista_de_Turnos *Aux)
